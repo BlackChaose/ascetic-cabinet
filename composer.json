@@ -1,10 +1,11 @@
 {
-    "name": "laravel/laravel",
+    "name": "ascetic-cabinet",
     "type": "project",
-    "description": "The Laravel Framework.",
+    "description": "The Ascetic-Cabitnet, boilerplate on Laravel",
     "keywords": [
-        "framework",
-        "laravel"
+        "boilerplate"
+
+        
     ],
     "license": "MIT",
     "require": {

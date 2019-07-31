@@ -1,17 +1,15 @@
 {
-    "name": "ascetic-cabinet",
+    "name": "laravel/laravel",
     "type": "project",
-    "description": "The Ascetic-Cabitnet, boilerplate on Laravel",
+    "description": "The Laravel Framework.",
     "keywords": [
-        "boilerplate"
-
-        
+        "framework",
+        "laravel"
     ],
     "license": "MIT",
     "require": {
         "php": "^7.1.3",
         "fideloper/proxy": "^4.0",
-        "guzzlehttp/guzzle": "^6.3",
         "laravel/framework": "5.8.*",
         "laravel/tinker": "^1.0"
     },

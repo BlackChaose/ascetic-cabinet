@@ -14,8 +14,8 @@
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('/mainpage','ApiCRUD@show_MainPage')->name('show_MainPage');
+Route::post('/quiz','ApiCRUD@show_quiz')->name('show_quiz');
 Route::post('/records','ApiCRUD@get_all_records')->name('get_all_recs');
 Route::post('/records_add','ApiCRUD@set_record')->name('rec_add');
 Route::post('filter_records','ApiCRUD@filter_records')->name('filter_rec');
-Route::get('records_search','ApiCRUD@records_search')->name('search');
+Route::get('/stat','ApiCRUD@show_stat')->name('search');

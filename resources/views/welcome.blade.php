@@ -1,58 +1,44 @@
 @extends('layouts.app')
 @section('content')	
-<div class='row align-items-center justify-content-center p-3'>
-	<div class="alert alert-primary" role="alert">
-	  Опрос о вашем впечатлении о:   
-	</div>
+<div id="QR-section" class="row align-items-center justify-content-center p-3">    
+   {{-- <qrreader-component></qrreader-component> --}}
+   <debugbtn-component></debugbtn-component>
 </div>
-
-<div class='row align-items-center justify-content-center p-3'>
-<div class="btn-group btn-group-toggle" data-toggle="buttons">
-	  <label class="btn btn-dark">
-		<i class="fas fa-user-md"></i>
-	  </label>
-	  <label class="btn btn-success">
-		<input type="radio" name="options" id="option2" autocomplete="off"> <i class="fas fa-thumbs-up"> хорошо</i>
-	  </label>
-	  <label class="btn btn-danger">
-		<input type="radio" name="options" id="option3" autocomplete="off"> <i class="fas fa-thumbs-down"> плохо</i>
-	  </label>
-	</div>
+<div aria-live="polite" aria-atomic="true" class="d-flex justify-content-center align-items-center" style="min-height: 200px;">
+  <!-- Then put toasts within -->
+  <div id="message" class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-delay="16000">
+    <div class="toast-header">
+      <img src="" class="rounded mr-2" alt="">
+      <strong class="mr-auto">Народный рейтинг</strong>
+      <small> согласен </small>
+      <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="toast-body">
+      Сканируя QR, вы принимаете условия использования сервиса
+      "Народный рейтинг" и понимаете, что информация о визите к врачу - а именно:
+      Дата, Время, №талона, Ф.И.О Врача, Название учреждения - будет передана третьим лицам
+      и в общий доступ в сети интернет. 
+      Также необходимо будет пройти опрос.
+      Обращаем внимамание - опрос анонимный, мы не получаем данные о Вас, а только указанную выше информацию
+      и Вашы отзывы.
+      Спасибо за то, что вы не равнодушны!
+      <hr>
+      Если Вы хотите только посмотреть статистику, перейдите по ссылке ниже:<br>
+      <a id="goToStat" href="{{ route('search') }}" >Посмотреть статистику</a>
+    </div>
+  </div>
 </div>
-
-<div class='row align-items-center justify-content-center p-3'>
-	<div class="btn-group btn-group-toggle" data-toggle="buttons">	  	
-	  <label class="btn btn-dark">
-		<i class="fas fa-clinic-medical"></i>
-	  </label>		  	
-	  <label class="btn btn-success">
-		<input type="radio" name="options" id="option2" autocomplete="off"> <i class="fas fa-thumbs-up"> хорошо</i>
-	  </label>
-	  <label class="btn btn-danger">
-		<input type="radio" name="options" id="option3" autocomplete="off"> <i class="fas fa-thumbs-down"> плохо</i>
-	  </label>
-	</div>
 </div>
-
-<div class='row align-items-center justify-content-center p-3'>
-	<div class="btn-group">
-		<div class="btn btn-info">
-			<i class="far fa-edit"></i>
-		</div>
-		<div class="btn btn-info">
-				комментировать	
-		</div>
-	</div>
-</div>
-
-<div class='row align-items-center justify-content-center p-3'>
-	<div class="btn-group">
-		<div class="btn btn-primary">
-			<i class="fas fa-check"></i>
-		</div>
-		<div class = "btn btn-primary">		
-			завершить опрос
-		</div>
-	</div>
-</div>
+@endsection
+@section('scripts')
+<script>
+$(document).ready( function(){
+    $('#message').toast('show');
+    $('#message').on('hidden.bs.toast', function () {
+           $('#QR-section').css('display','block'); 
+})
+} );
+</script>
 @endsection

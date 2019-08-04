@@ -20,13 +20,13 @@
     @yield('styles')
 </head>
 <body>
-  <div id="app">
+  <div id = "app">
 		<main>
-			<div class="container-fluid bg-gradient-primary py-5">
+			<div class="container bg-gradient-primary py-5">
 			  @yield('content')
 			</div>
 		</main>
-  
+    
 		<footer>
 			<div class="container">
 				<div class='row align-items-center justify-content-center'>
@@ -34,8 +34,8 @@
 				</div>
 			</div>
 		</footer>
+</div>
 
-  </div>
 
   <!-- Scripts -->
   <script src="{{ asset('js/app.js') }}">  </script>

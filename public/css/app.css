@@ -15030,3 +15030,44 @@ a.text-dark:focus {
   }
 }
 
+#QR-section {
+  display: none;
+  /*border: 1px solid blue;*/
+}
+
+@media screen and (min-width: 1201px) {
+  .container {
+    width: 25% !important;
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  .container {
+    width: 40% !important;
+  }
+}
+
+@media screen and (max-width: 992px) {
+  .container {
+    width: 50% !important;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .container {
+    width: 60% !important;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .container {
+    width: 80% !important;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .container {
+    width: 100% !important;
+  }
+}
+

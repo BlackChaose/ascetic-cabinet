@@ -7,10 +7,15 @@ use Illuminate\Support\Facades\DB;
 
 class ApiCRUD extends Controller
 {
-		public function show_MainPage(){
+		public function show_quiz(Request $req){
 			
-			return view('application');
+			$userData = $req->userData;
+			return view('quiz',['userData'=>$userData]);
 			}
+		
+		public function show_stat(){
+			return view('stat');
+		}
 			
 		public function get_all_records(){
 			$res = DB::table('records')         
@@ -21,20 +26,20 @@ class ApiCRUD extends Controller
 			
 		public function set_record(Request $req){
 				
-			if(!empty($req)){
+			// if(!empty($req)){
 			
-				$res = DB::table('records')->insert(
-						[
-						 'ticket_num' => $req['new_record']['ticket_num'],
-						 'name_org'=> $req['new_record']['name_org'],
-						 'data_visit' => $req['new_record']['data_visit'],
-						 'doctor_name' => $req['new_record']['doctor_name'],
-						 'doctor_spec' => $req['new_record']['doctor_spec'],
-						 'cab_num' => $req['new_record']['cab_num']
-						 ]
-					);
-				}				
-			 return response()->json(['response'=>$res]);
+			// 	$res = DB::table('records')->insert(
+			// 			[
+			// 			 'ticket_num' => $req['new_record']['ticket_num'],
+			// 			 'name_org'=> $req['new_record']['name_org'],
+			// 			 'data_visit' => $req['new_record']['data_visit'],
+			// 			 'doctor_name' => $req['new_record']['doctor_name'],
+			// 			 'doctor_spec' => $req['new_record']['doctor_spec'],
+			// 			 'cab_num' => $req['new_record']['cab_num']
+			// 			 ]
+			// 		);
+			// 	}				
+			 return response()->json(['response'=>$req, 'arr'=>$_POST],200);
 		}
 		public function filter_records(Request $rec){
 			

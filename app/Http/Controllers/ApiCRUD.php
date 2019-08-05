@@ -49,10 +49,11 @@ class ApiCRUD extends Controller
 		public function records_search(Request $rec){
 			if(!empty($rec->query('search'))){
 				$plh=urlencode($rec->query('search'));
-				$sql=' name_org LIKE \'%'.$plh.'%\'';
+				$sql='name_org LIKE \'%'.$plh.'%\'';
 				$res = DB::table('records')->whereRaw($sql)->get();
 				return response()->json(['response'=>$res],200);
 			}
 			return response()->json(['response'=>'not found'],200);
 		}
+		
 }

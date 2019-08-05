@@ -12,15 +12,7 @@
 </div>
 @endif
 
-<div class="input-group mb-3">
-  <div class="input-group-prepend">
-    <span class="input-group-text"> <i class="fas fa-clinic-medical"></i> </span>
-  </div>
-  <input type="text" class="form-control" placeholder="Учреждение" aria-label="Учреждение" aria-describedby="basic-addon1">
-  <div class="input-group-append">
-	<span class="input-group-text"> <i class="fas fa-search"></i> </span>
-  </div>
-</div>   
+<livesearch-component></livesearch-component> 
 
 <div class="input-group mb-3">
   <div class="input-group-prepend">

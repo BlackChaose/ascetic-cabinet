@@ -22,6 +22,7 @@ window.Vue = require('vue');
 //Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 Vue.component('qrreader-component', require('./components/QrReaderComponent.vue').default);
 Vue.component('debugbtn-component', require('./components/DebugBtnComponent.vue').default);
+Vue.component('livesearch-component', require('./components/LiveSearchComponent.vue').default);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application

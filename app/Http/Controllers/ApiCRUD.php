@@ -57,10 +57,25 @@ class ApiCRUD extends Controller
 			return view('stat');
 		}
 			
-		public function get_all_records(){
-			$res = DB::table('records')         
-                ->get();	
-                
+		public function get_all_records(Request $req){
+			if(!empty($req) && !empty($req['org'])){
+				//$marker = $req['org'];
+				try{
+					$res = DB::table('records')->select('name_org')->distinct()->get();	
+					}catch(QueryException $e){
+						return response()->json(['error'=>'$e->message']); 
+					}
+			}else if(!empty($req) && !empty($req['fio'])){
+				//$marker = $req['fio'];
+				try{
+					$res = DB::table('records')->select('doctor_name')->distinct()->get();	
+					}catch(QueryException $e){
+						return response()->json(['error'=>'$e->message']); 
+					}
+			}
+
+			
+
             return response()->json(['response'=>$res]);					
 			}
 			

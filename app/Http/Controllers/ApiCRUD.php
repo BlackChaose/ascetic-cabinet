@@ -71,7 +71,7 @@ class ApiCRUD extends Controller
 			if(!empty($req->searchtpl) && $type == 'doctor'){
 				try{
 				$strLike = 'doctor_name like ?';
-				$res = DB::table('records')->select('doctor_name', 'doctor_spec', 'name_org')->whereRaw($strLike,['%'.$req->searchtpl.'%'])->distinct('doctor_name')->get();	
+				$res = DB::table('records')->select('doctor_name', 'doctor_spec', 'name_org')->whereRaw($strLike,['%'.$req->searchtpl.'%'])->distinct('doctor_name')->get()->toArray();	
 				}catch(QueryException $e){
 					return response()->json(['error'=>$e]); 
 				}
@@ -94,7 +94,7 @@ class ApiCRUD extends Controller
 
 			
 
-            return response()->json(['response'=>$res]);					
+            return response()->json(['search'=>$res]);					
 			}
 			
 		public function set_record(Request $req){

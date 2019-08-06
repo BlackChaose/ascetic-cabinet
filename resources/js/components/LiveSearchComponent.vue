@@ -7,7 +7,8 @@
 
 
 <script>
-import Autocomplete from '@trevoreyre/autocomplete-vue'
+import Autocomplete from '@trevoreyre/autocomplete-vue';
+import _ from 'lodash';
 
 export default{
 name: 'LiveSearchComponent',
@@ -37,16 +38,16 @@ search(input) {
           })
           .then(response => response.json())
           .then(data => {
-            resolve(data.query.search)
+               resolve(_.map(data.search, el => {console.warn(el.name_org); return el.name_org}))
           })
 
       })
     },
 getResultValue(result) {
-      return result.title
+      return result;
     },
 handleSubmit(result) {
-      window.open(google.com);
+      window.open('https://google.com/search?q='+result);
     }
     },
 components: {

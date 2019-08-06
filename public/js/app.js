@@ -2417,6 +2417,8 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _trevoreyre_autocomplete_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @trevoreyre/autocomplete-vue */ "./node_modules/@trevoreyre/autocomplete-vue/dist/autocomplete.esm.js");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_1__);
 //
 //
 //
@@ -2425,6 +2427,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'LiveSearchComponent',
@@ -2456,15 +2459,18 @@ __webpack_require__.r(__webpack_exports__);
         }).then(function (response) {
           return response.json();
         }).then(function (data) {
-          resolve(data.query.search);
+          resolve(lodash__WEBPACK_IMPORTED_MODULE_1___default.a.map(data.search, function (el) {
+            console.warn(el.name_org);
+            return el.name_org;
+          }));
         });
       });
     },
     getResultValue: function getResultValue(result) {
-      return result.title;
+      return result;
     },
     handleSubmit: function handleSubmit(result) {
-      window.open(google.com);
+      window.open('https://google.com/search?q=' + result);
     }
   },
   components: {

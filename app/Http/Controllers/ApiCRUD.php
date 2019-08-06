@@ -57,22 +57,40 @@ class ApiCRUD extends Controller
 			return view('stat');
 		}
 			
-		public function get_all_records(Request $req){
-			if(!empty($req) && !empty($req['org'])){
-				//$marker = $req['org'];
-				try{
-					$res = DB::table('records')->select('name_org')->distinct()->get();	
+		public function get_all_records(Request $req, $type){
+			// dd($req->searchtpl, $req);
+			
+			if(!empty($req->searchtpl) && $type == 'org'){
+					try{
+					$strLike = 'name_org like ?';
+					$res = DB::table('records')->select('name_org')->whereRaw($strLike,['%'.$req->searchtpl.'%'])->distinct()->get();	
 					}catch(QueryException $e){
-						return response()->json(['error'=>'$e->message']); 
-					}
-			}else if(!empty($req) && !empty($req['fio'])){
-				//$marker = $req['fio'];
-				try{
-					$res = DB::table('records')->select('doctor_name')->distinct()->get();	
-					}catch(QueryException $e){
-						return response()->json(['error'=>'$e->message']); 
+						return response()->json(['error'=>$e]); 
 					}
 			}
+			if(!empty($req->searchtpl) && $type == 'doctor'){
+				try{
+				$strLike = 'doctor_name like ?';
+				$res = DB::table('records')->select('doctor_name', 'doctor_spec', 'name_org')->whereRaw($strLike,['%'.$req->searchtpl.'%'])->distinct('doctor_name')->get();	
+				}catch(QueryException $e){
+					return response()->json(['error'=>$e]); 
+				}
+			}
+			// if(!empty($req) && !empty($req['org'])){
+			// 	//$marker = $req['org'];
+			// 	try{
+			// 		$res = DB::table('records')->select('name_org')->distinct()->get();	
+			// 		}catch(QueryException $e){
+			// 			return response()->json(['error'=>'$e->message']); 
+			// 		}
+			// }else if(!empty($req) && !empty($req['fio'])){
+			// 	//$marker = $req['fio'];
+			// 	try{
+			// 		$res = DB::table('records')->select('doctor_name')->distinct()->get();	
+			// 		}catch(QueryException $e){
+			// 			return response()->json(['error'=>'$e->message']); 
+			// 		}
+			// }
 
 			
 

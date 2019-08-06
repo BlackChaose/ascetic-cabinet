@@ -1,44 +1,60 @@
 <template>
-<div class="input-group mb-3">
-  <div class="input-group-prepend">
-    <span class="input-group-text"> <i class="fas fa-clinic-medical"></i> </span>
+  <div>
+      <autocomplete :search="search" :placeholder="phName" :aria-label="arName" :get-result-value="getResultValue" @submit="handleSubmit"></autocomplete>
+      <input type="hidden" name="_token" :value="csrf">       
   </div>
-      <input type="text" class="form-control" v-bind:placeholder="orgSearch" v-bind:aria-label="orgSearch" aria-describedby="basic-addon1">
-  <div class="input-group-append" v-on:click="searchOrg">
-	<span class="input-group-text"> <i class="fas fa-search"></i> </span>
-  </div>
-</div>  
-   
 </template>
 
 
 <script>
-export default{
-data () {
-  return {
-      orgs: [],
-      fios:[],
-      orgSearch: 'Учреждение',
-      fioSearch: ''
-    }
-},
-methods: {
-    searchOrg: function(){
-      let data = {};
-      data.org = 'org';
+import Autocomplete from '@trevoreyre/autocomplete-vue'
 
-      axios.post('/records', data)
-      .then(function (response) {
-        console.log(response.data);
-        this.orgs = response.data;
-        console.log(this.orgs);
+export default{
+name: 'LiveSearchComponent',
+props: ['typeSearch','phName', 'arName'],  
+data: () => ({
+            csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+          }),        
+methods: {
+search(input) {
+  console.log(this.typeSearch);
+      const url = `/records/${this.typeSearch}`;
+      var data = {
+        searchtpl: `${input}`,
+        _token: document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+      };
+      return new Promise(resolve => {
+        if (input.length < 2) {
+          return resolve([])
+        }
+
+        fetch(url,{
+            method: 'POST', 
+            body: JSON.stringify(data), 
+            headers:{
+              'Content-Type': 'application/json'
+            }
+          })
+          .then(response => response.json())
+          .then(data => {
+            resolve(data.query.search)
+          })
+
       })
-      .catch(function (error) {
-        console.log(error);
-      });
+    },
+getResultValue(result) {
+      return result.title
+    },
+handleSubmit(result) {
+      window.open(google.com);
     }
-    }
+    },
+components: {
+  Autocomplete
 }
+}
+
+
 </script>
 
 

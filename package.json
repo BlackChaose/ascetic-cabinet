@@ -27,6 +27,7 @@
     },
     "dependencies": {
         "@fortawesome/fontawesome-free": "^5.10.0",
+        "@trevoreyre/autocomplete-vue": "^2.0.2",
         "chart.js": "^2.8.0",
         "jquery": "^3.2",
         "vue-qrcode-reader": "^2.0.3"

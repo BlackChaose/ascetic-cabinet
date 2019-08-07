@@ -22,7 +22,7 @@ data () {
 methods: {
     dbgBtnHandler: function(){
       let data = {};
-      data.userData = this.userData;
+      data.userData = this.userData9;
          
       axios.post('/quiz', data)
       .then(function (response) {

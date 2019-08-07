@@ -14,12 +14,9 @@
 
 
 <div class="input-group mb-3">
-  <div class="input-group-prepend">
-    <span class="input-group-text"> <i class="fas fa-clinic-medical"></i> </span>
-  </div>
   <livesearch-component type-search="org" ph-name="Название учреждения" ar-name="поиск учреждения"></livesearch-component> 
   <div class="input-group-append">
-	<span class="input-group-text"> <i class="fas fa-search"></i> </span>
+  <span class="input-group-text"> <i class="fas fa-clinic-medical"></i> </span>
   </div>
 </div>  
 

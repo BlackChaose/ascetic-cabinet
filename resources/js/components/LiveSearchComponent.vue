@@ -9,6 +9,7 @@
 <script>
 import Autocomplete from '@trevoreyre/autocomplete-vue';
 import _ from 'lodash';
+import '@trevoreyre/autocomplete-vue/dist/style.css'
 
 export default{
 name: 'LiveSearchComponent',
@@ -60,5 +61,9 @@ components: {
 
 
 <style>
-
+input.autocomplete-input{
+ max-height: 28px !important;
+ max-width: 200px;
+ border-radius: 4px !important;
+} 
 </style>

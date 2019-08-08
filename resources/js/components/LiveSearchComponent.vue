@@ -48,22 +48,42 @@ getResultValue(result) {
       return result;
     },
 handleSubmit(result) {
-      window.open('https://google.com/search?q='+result);
-    }
-    },
+        const url_filter = `/filter_records/${this.typeSearch}/`;
+        var data = {
+        param: result,
+        _token: document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+      };
+
+      return new Promise(resolve => {
+          fetch(url_filter,{
+            method: 'POST',
+            body: JSON.stringify(data),
+            headers: {
+              'Content-Type': 'application/json'
+            }
+          })
+          .then(response => response.json())
+          .then(data => {
+                  resolve(document.getElementById('charts_area').textContent=data.range);
+              })
+      });
+
+    }},
 components: {
   Autocomplete
 }
 }
-
 
 </script>
 
 
 <style>
 input.autocomplete-input{
+ display: block;
+ position: relative;
  max-height: 28px !important;
- max-width: 200px;
+ max-width: 300px;
  border-radius: 4px !important;
+ text-align: left;
 } 
 </style>

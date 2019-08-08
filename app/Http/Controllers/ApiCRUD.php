@@ -64,37 +64,24 @@ class ApiCRUD extends Controller
 					try{
 					$strLike = 'name_org like ?';
 					$res = DB::table('records')->select('name_org')->whereRaw($strLike,['%'.$req->searchtpl.'%'])->distinct()->get();	
+					return response()->json(['search'=>$res]);	
 					}catch(QueryException $e){
 						return response()->json(['error'=>$e]); 
 					}
 			}
+
 			if(!empty($req->searchtpl) && $type == 'doctor'){
 				try{
 				$strLike = 'doctor_name like ?';
 				$res = DB::table('records')->select('doctor_name', 'doctor_spec', 'name_org')->whereRaw($strLike,['%'.$req->searchtpl.'%'])->distinct('doctor_name')->get()->toArray();	
+				return response()->json(['search'=>$res]);	
 				}catch(QueryException $e){
 					return response()->json(['error'=>$e]); 
 				}
 			}
-			// if(!empty($req) && !empty($req['org'])){
-			// 	//$marker = $req['org'];
-			// 	try{
-			// 		$res = DB::table('records')->select('name_org')->distinct()->get();	
-			// 		}catch(QueryException $e){
-			// 			return response()->json(['error'=>'$e->message']); 
-			// 		}
-			// }else if(!empty($req) && !empty($req['fio'])){
-			// 	//$marker = $req['fio'];
-			// 	try{
-			// 		$res = DB::table('records')->select('doctor_name')->distinct()->get();	
-			// 		}catch(QueryException $e){
-			// 			return response()->json(['error'=>'$e->message']); 
-			// 		}
-			// }
-
 			
 
-            return response()->json(['search'=>$res]);					
+			return response()->json(['message'=>'not found!']);	 				
 			}
 			
 		public function set_record(Request $req){
@@ -118,12 +105,19 @@ class ApiCRUD extends Controller
 			 //return response()->json(['response'=>$req, 'arr'=>$_POST, 'res'=>$res],200);
 			 return  view('stat',['message'=>"Спасибо что оставили свой отзыв"]);
 		}
-		public function filter_records(Request $rec){
+		public function filter_records(Request $req, $type){
 			
-				if(!empty($rec['filter']['name_org'])){
-					$sql='name_org LIKE %'.$rec['filter']['name_org'].'%';
-					$res = DB::table('records')->whereRaw($sql)->get();
-					return response()->json(['response'=>$res]);
+				if(!empty($req->param) && $type == 'org'){
+					$rq = 'name_org like ?';
+					$res = DB::table('records')->select(DB::raw('SUM(clinic_range) as rg, COUNT(clinic_range) as cnt'))->whereRaw($rq,['%'.$req->param.'%'])->get()->toArray();
+			
+					return response()->json(['response'=>['sum'=>$res[0]->rg,'nums'=>$res[0]->cnt,'range'=>$res[0]->rg/$res[0]->cnt]]);
+				}
+				if(!empty($req->param) && $type == 'doctor'){
+					$rq = 'name_org like ?';
+					$res = DB::table('records')->select(DB::raw('SUM(doc_range) as rg, COUNT(doc_range) as cnt'))->whereRaw($rq,['%'.$req->param.'%'])->get()->toArray();
+			
+					return response()->json(['response'=>['sum'=>$res[0]->rg,'nums'=>$res[0]->cnt,'range'=>$res[0]->rg/$res[0]->cnt]]);
 				}
 				return response()->json(['response'=>'null']);			
 			}

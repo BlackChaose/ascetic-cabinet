@@ -2503,7 +2503,24 @@ __webpack_require__.r(__webpack_exports__);
       return result;
     },
     handleSubmit: function handleSubmit(result) {
-      window.open('https://google.com/search?q=' + result);
+      var url_filter = "/filter_records/".concat(this.typeSearch, "/");
+      var data = {
+        param: result,
+        _token: document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+      };
+      return new Promise(function (resolve) {
+        fetch(url_filter, {
+          method: 'POST',
+          body: JSON.stringify(data),
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        }).then(function (response) {
+          return response.json();
+        }).then(function (data) {
+          resolve(document.getElementById('charts_area').textContent = data.range);
+        });
+      });
     }
   },
   components: {
@@ -7116,7 +7133,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\ninput.autocomplete-input{\n max-height: 28px !important;\n max-width: 200px;\n border-radius: 4px !important;\n} \n", ""]);
+exports.push([module.i, "\ninput.autocomplete-input{\n display: block;\n position: relative;\n max-height: 28px !important;\n max-width: 300px;\n border-radius: 4px !important;\n text-align: left;\n} \n", ""]);
 
 // exports
 

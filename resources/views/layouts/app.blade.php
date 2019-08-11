@@ -22,7 +22,7 @@
 <body>
   <div id = "app">
 		<main>
-			<div class="container bg-gradient-info py-5">
+			<div class="container bg-info py-5">
 			  @yield('content')
 			</div>
 		</main>

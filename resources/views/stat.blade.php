@@ -21,6 +21,9 @@
   </div>  
 </div>
 
+<div id="charts_area1" style="text-align: center;" class="d-flex justify-content-center aligin-item-center p-2">
+  
+</div>
 
 <div aria-live="polite" aria-atomic="true" class="d-flex justify-content-center align-items-center">
   <div class="input-group mb-3">
@@ -31,7 +34,8 @@
   </div>    
 </div>
 
-<div id="charts_area" style="text-align: center; color: red; font-size: larger; font-weight: bolder;">
+<div id="charts_area2" style="text-align: center; " class="d-flex justify-content-center aligin-item-center p-2">
+
 </div>
 @endsection
 @section('script')

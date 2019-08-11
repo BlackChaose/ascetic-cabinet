@@ -2518,7 +2518,20 @@ __webpack_require__.r(__webpack_exports__);
         }).then(function (response) {
           return response.json();
         }).then(function (data) {
-          resolve(document.getElementById('charts_area').textContent = data.range);
+          if (!isNaN(parseFloat(data.response.range))) {
+            console.warn(data.response.range);
+            var obj_txt = document.createElement('span');
+            obj_txt.textContent = 'средняя оценка учреждения: ';
+            obj_txt.style.backgroundColor = 'cyan';
+            var obj_range = document.createElement('b');
+            obj_range.style.color = 'red';
+            obj_range.style.fontSize = 'larger';
+            obj_range.style.fontWeight = 'bolder';
+            obj_range.style.backgroundColor = 'yellow';
+            obj_range.textContent = parseFloat(data.response.range).toFixed(2);
+            obj_txt.append(obj_range);
+            resolve(document.getElementById('charts_area1').append(obj_txt));
+          }
         });
       });
     }

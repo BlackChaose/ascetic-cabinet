@@ -64,7 +64,24 @@ handleSubmit(result) {
           })
           .then(response => response.json())
           .then(data => {
-                  resolve(document.getElementById('charts_area').textContent=data.range);
+                if(!isNaN(parseFloat(data.response.range))){
+                  console.warn(data.response.range);
+
+                  let obj_txt=document.createElement('span');
+                  obj_txt.textContent='средняя оценка учреждения: ';
+                  obj_txt.style.backgroundColor='cyan';
+
+                  let obj_range=document.createElement('b');
+                  obj_range.style.color='red';
+                  obj_range.style.fontSize='larger';
+                  obj_range.style.fontWeight='bolder';
+                  obj_range.style.backgroundColor='yellow';
+                  
+                  obj_range.textContent=parseFloat(data.response.range).toFixed(2);
+
+                  obj_txt.append(obj_range);
+                  resolve(document.getElementById('charts_area1').append(obj_txt));
+                  }
               })
       });
 
